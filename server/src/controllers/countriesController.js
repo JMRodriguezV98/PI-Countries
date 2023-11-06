@@ -14,8 +14,9 @@ const getCountriesController = async() => {
         countries.forEach( async ( country ) => {
             await Countries.findOrCreate({
                 where: { 
+                    id: country.id,
                     name: country.name,
-                    image:country.image,
+                    image: country.image,
                     continent: country.continent,
                     capital: country.capital === false ? 'false' : country.capital,
                     subregion: country.subregion !== false ? 'false' : country.subregion,
@@ -29,6 +30,21 @@ const getCountriesController = async() => {
     return countries;
 }
 
+const getCountryByIdController = async( idCountry ) => {
+    const countryByIdBD = await Countries.findByPk( idCountry );
+    
+    if( idCountry.length > 3 || idCountry.length < 3 ){
+        throw new Error( `El id debe ser de 3 letras` )
+    }
+
+    if( countryByIdBD === null ){
+        throw new Error( `No se encuentran resultados con el id: ${ idCountry }` );
+    }
+
+    return countryByIdBD;
+}
+
 module.exports = {
     getCountriesController,
+    getCountryByIdController
 }

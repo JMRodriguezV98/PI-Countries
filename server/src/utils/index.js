@@ -4,6 +4,7 @@ const cleanInfoAPI = ( response ) => {
     const countriesClean = [];
     for( const country of countriesAPI ){
 
+        const id = country.cca3;
         const name = country.name.common;
         const image = country.flags.svg;
         const continent = Array.isArray( country.continents ) && country.continents.toString();
@@ -13,6 +14,7 @@ const cleanInfoAPI = ( response ) => {
         const population = country.population;
 
         countriesClean.push({
+            id,
             name,
             image,
             continent,
