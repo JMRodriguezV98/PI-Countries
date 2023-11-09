@@ -1,6 +1,7 @@
 const axios = require( 'axios' );
 const { cleanInfoAPI } = require( '../utils' );
 const { Countries } = require( '../db' );
+const { Op } = require('sequelize');
 
 //ruta del api
 const api = 'http://localhost:5000/countries';
@@ -15,7 +16,7 @@ const getCountriesController = async() => {
             await Countries.findOrCreate({
                 where: { 
                     id: country.id,
-                    name: country.name,
+                    name: country.name.toLowerCase(),
                     image: country.image,
                     continent: country.continent,
                     capital: country.capital === false ? 'false' : country.capital,
@@ -26,15 +27,13 @@ const getCountriesController = async() => {
             })
         })
     }
-
-    return countries;
 }
 
 const getCountryByIdController = async( idCountry ) => {
     const countryByIdBD = await Countries.findByPk( idCountry );
     
     if( idCountry.length > 3 || idCountry.length < 3 ){
-        throw new Error( `El id debe ser de 3 letras` )
+        throw new Error( `El id debe ser de 3 letras` );
     }
 
     if( countryByIdBD === null ){
@@ -44,7 +43,24 @@ const getCountryByIdController = async( idCountry ) => {
     return countryByIdBD;
 }
 
+const getCountryByNameController = async ( countryName ) => {
+    const countryByName = await Countries.findAll({
+        where: {
+            name: {
+                [ Op.like ]: `%${ countryName }%` 
+            }
+        }
+    })
+
+    if( countryByName.length === 0 ){
+        throw new Error( `No se encontraron paises con las coincidencias ${ countryName }` );
+    }
+
+    return [ countryByName ];
+}
+
 module.exports = {
     getCountriesController,
-    getCountryByIdController
+    getCountryByIdController,
+    getCountryByNameController
 }
