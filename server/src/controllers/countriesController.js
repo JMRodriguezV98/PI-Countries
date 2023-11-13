@@ -59,8 +59,15 @@ const getCountryByNameController = async ( countryName ) => {
     return [ countryByName ];
 }
 
+const getCountries = async () => {
+    const countriesDB = await Countries.findAll();
+
+    return [ countriesDB ]
+}
+
 module.exports = {
     getCountriesController,
     getCountryByIdController,
-    getCountryByNameController
+    getCountryByNameController,
+    getCountries
 }

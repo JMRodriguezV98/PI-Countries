@@ -1,4 +1,4 @@
-const { getCountriesController,getCountryByIdController, getCountryByNameController } = require("../controllers/countriesController");
+const { getCountriesController,getCountryByIdController, getCountryByNameController, getCountries } = require("../controllers/countriesController");
 
 
 const getCountriesAndSaveDBHandler = async ( req,res ) => {
@@ -23,9 +23,20 @@ const getCountryByIdHandler = async ( req,res ) => {
 const getCountryByNameHandler = async ( req,res ) => {
     try {
         const { countryName } = req.query;
-        const countryNameLower = countryName.toLowerCase();
-        const response = await getCountryByNameController( countryNameLower );
-        res.status( 200 ).json( response );
+        
+        if( countryName ){
+            const countryNameLower = countryName.toLowerCase();
+            const response = await getCountryByNameController( countryNameLower );
+            if( response.length ){
+                res.status( 200 ).json( response );
+            }else{
+                throw new Error(`No se encontro un pais con el nombre ${ countryNameLower }`);
+            }
+        }else{
+            const response = await getCountries();
+            res.status( 200 ).json( response );
+        }
+
     } catch (error) {
         res.status( 404 ).json( { error: error.message } );
     }

@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            len: [ 5,30 ]
+            len: [ 3,30 ]
         }
     },
     difficulty: {
