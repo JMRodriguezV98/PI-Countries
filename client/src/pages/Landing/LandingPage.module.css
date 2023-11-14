@@ -1,0 +1,36 @@
+.principalLanding {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: var( --color-primary );
+    flex-direction: column;
+}
+
+#buttonLogin{
+    transition: 0.3s ease;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100px;
+    height: 30px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-weight: 900;
+    font-family: Helvetica, sans-serif;
+    color: var( --color-primary );
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+#buttonLogin:hover{
+    transform: scale(1.3);
+    box-shadow: rgba(233, 129, 129, 0.25) 0px 54px 55px, rgba(233, 129, 129, 0.25) 0px -12px 30px, rgba(233, 129, 129, 0.25) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.imagenfondo{
+    width: 100%;
+    height: 100%;
+}
