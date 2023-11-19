@@ -1,0 +1,40 @@
+.contentNavbar{
+    display: flex;
+    width: 100vw;
+    height: 100px;
+    justify-content: space-between;
+    background-color: var( --color-primary );
+}
+
+.contentLogo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 100%;
+}
+
+#logo{
+    height: 100%;
+}
+
+.contentSections{
+    display: flex;
+    height: 100%;
+    width: 300px;
+    justify-content: space-around;
+    font-family: Helvetica, sans-serif;
+    align-items: center;
+    color: var( --color-tertiary );
+}
+
+.contentSearchBar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    flex-direction: column;
+    font-family: Helvetica, sans-serif;
+    color: var( 
+        --color-tertiary );
+}

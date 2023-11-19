@@ -1,0 +1,7 @@
+.contentCards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100vw;
+    background-color: plum;
+}
