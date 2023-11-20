@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_BY_NAME, GET_COUNTRIES } from "./action-Types";
+import { GET_BY_ID, GET_BY_NAME, GET_COUNTRIES } from "./action-Types";
 
 
 export const getCountries = () => {
@@ -25,7 +25,21 @@ export const getCountriesByName = ( nameCountry ) => {
                 payload: response.data
             })
         } catch (error) {
-            
+            alert( error.response.data.error );
+        }
+    }
+}
+
+export const getCountryById = ( idCountry ) => {
+    return async ( dispatch ) => {
+        try {
+            const response = await axios( `http://localhost:3001/countries/${ idCountry }` );
+            dispatch({
+                type: GET_BY_ID,
+                payload: response.data
+            })
+        } catch (error) {
+            alert( error.response.data.error );
         }
     }
 }

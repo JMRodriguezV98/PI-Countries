@@ -26,6 +26,7 @@
     font-family: Helvetica, sans-serif;
     align-items: center;
     color: var( --color-tertiary );
+    text-decoration: none;
 }
 
 .contentSearchBar{
@@ -37,4 +38,9 @@
     font-family: Helvetica, sans-serif;
     color: var( 
         --color-tertiary );
+}
+
+.link{
+    text-decoration: none;
+    color: var( --color-tertiary );
 }
