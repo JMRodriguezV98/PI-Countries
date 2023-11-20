@@ -56,7 +56,7 @@ const getCountryByNameController = async ( countryName ) => {
         throw new Error( `No se encontraron paises con las coincidencias ${ countryName }` );
     }
 
-    return [ countryByName ];
+    return countryByName;
 }
 
 const getCountries = async () => {

@@ -1,12 +1,25 @@
 .containCard{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     margin-top: 25px;
     margin-right: 15px;
     margin-left: 15px;
     align-items: center;
     width: 400px;
     height: 300px;
-    background-color: red;
+    background-color: var( --color-quinary ); 
+}
+
+.contentImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 70%;
+}
+
+.image{
+    width: 70%;
+    height: 70%;
 }

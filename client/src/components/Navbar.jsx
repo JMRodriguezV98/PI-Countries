@@ -1,7 +1,7 @@
 import styles from './Navbar.module.css'
 import logo from '../assets/logoHenryCountry.svg';
 
-const Navbar = () => {
+const Navbar = ( { onHandleSubmit,onHandleChange } ) => {
   return (
     <>
         <div className={ styles.contentNavbar }>
@@ -14,10 +14,10 @@ const Navbar = () => {
             </div>
             <div className={ styles.contentSearchBar }>
                 <label>Country</label>
-                <div className={ styles.search }>
-                    <input type="text" />
+                <div className={ styles.search } >
+                    <input type="text" onChange={ onHandleChange } />
+                    <button onClick={ onHandleSubmit } type='submit'>Search</button>
                 </div>
-
             </div>
         </div>
     </>
