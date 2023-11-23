@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
-import { getCountries, getCountriesByName } from '../../redux/actions/actions'
+import { getCountries, getCountriesByName, orderCountries, paginateCountries } from '../../redux/actions/actions'
 import Cards from '../../components/Cards/Cards'
 import Navbar from '../../components/Navbar'
 import styles from './HomePage.module.css'
+import Ordenamiento from '../../components/filtersOrders/Ordenamiento'
+import Paginado from '../../components/Paginado/Paginado'
 
 const HomePage = () => {
 
@@ -25,13 +27,16 @@ const HomePage = () => {
   useEffect(() => {
     dispatch( getCountries() );
   },[ dispatch ])
-  
 
   return (
     <>
-      <Navbar onHandleChange={ onHandleChange } onHandleSubmit={ onHandleSubmit } />
-      <div className={ styles.principalHome } >
-        <Cards allCountries = { allCountries } />
+      <div className={ styles.principalContent }>
+        <Navbar onHandleChange={ onHandleChange } onHandleSubmit={ onHandleSubmit } />
+        <Ordenamiento />
+        <Paginado />
+        <div className={ styles.principalHome } >
+          <Cards allCountries = { allCountries } />
+        </div>
       </div>
     </>
   )

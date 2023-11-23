@@ -7,7 +7,7 @@ const Cards = ({ allCountries }) => {
     <>
         <div className={ styles.contentCards }>
           { allCountries?.map( ( country ) => (
-            <Card key={ country.id } country={ country }/>
+            <Card key={ country.id } country={ country } />
           ))}
         </div>
     </>

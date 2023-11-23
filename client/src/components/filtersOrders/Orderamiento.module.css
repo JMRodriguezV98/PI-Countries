@@ -1,0 +1,16 @@
+.contentFilters{
+    display: flex;
+    margin-top: 30px;
+    justify-content: space-around;
+}
+
+.contentOrders{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentOrders select{
+    margin-top: 10px;
+}
