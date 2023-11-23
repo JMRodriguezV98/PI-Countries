@@ -12,13 +12,46 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    height: 50%;
+    height: 80%;
     width: 30%;
     color: white;
     font-family: Helvetica, sans-serif;
+    background-color: rgba(240, 248, 255, 0.082);
 }
 
 .fieldsContent{
     display: flex;
     flex-direction: column;
+}
+
+.fieldsContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fieldsContent span{
+    margin-top: 5px;
+    color: var( --color-quaternary );
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.fieldsContent input{
+    border-radius: 15px 15px 10px 10px;
+    padding-left: 10px;
+    color: var( --color-primary );
+}
+
+.countriesWatch{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.countriesWatch span{
+    color: var( --color-quinary );
 }

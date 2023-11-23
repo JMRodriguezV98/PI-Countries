@@ -20,16 +20,48 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 70%;
+    width: 60%;
     height: 60%;
+    background-color: rgba(240, 248, 255, 0.082);
+    border-radius: 20px;
 }
 
 .flagContent{
-    width: 50%;
-    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 80%;
 }
 
 .flag{
-    width: 100%;
+    width: 80%;
     height: 100%;
+}
+
+.contentInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: var( --color-secondary );
+    font-family: Helvetica, sans-serif;
+    height: 100%;
+    width: 30%;
+}
+
+.divInfo{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.divInfo p{
+    
+    text-transform: uppercase;
+    color: var(--color-quinary);
+}
+
+.divInfo h3{
+    text-transform: uppercase;
+    color: var(--color-secondary);
 }

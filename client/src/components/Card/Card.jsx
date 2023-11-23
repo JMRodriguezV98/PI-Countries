@@ -15,9 +15,20 @@ const Card = ({country}) => {
           <div className={ styles.contentImage }>
             <img className={ styles.image } src={ image } alt="imagen del pais" />
           </div>
-          <h3>{ name }</h3>
-          <h3>{ continent }</h3>
-          <h3>{ population }</h3>
+          <div className={ styles.contentInfo }>
+            <h3 className={ styles.h3Titles } >
+              <p className={ styles.titles }>Nombre:</p>
+              { name }
+            </h3>
+            <h3 className={ styles.h3Titles }>
+              <p className={ styles.titles }>Continente:</p>
+              { continent }
+            </h3>
+            <h3 className={ styles.h3Titles }>
+              <p className={ styles.titles }>Poblacion:</p> 
+              { population }
+            </h3>
+          </div>
         </div>
       </Link>
     </>

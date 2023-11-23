@@ -37,6 +37,7 @@ const HomePage = () => {
         <div className={ styles.principalHome } >
           <Cards allCountries = { allCountries } />
         </div>
+        <footer className={ styles.footer }>Javier Mauricio Rodriguez Villamil</footer>
       </div>
     </>
   )

@@ -11,21 +11,26 @@ const getCountriesController = async() => {
     const countriesDB = await Countries.findAll();
     const countries = cleanInfoAPI( response );
 
-    if( !countriesDB.length ){
-        countries.forEach( async ( country ) => {
+    if (!countriesDB.length) {
+        countries.forEach(async (country) => {
+            const countryData = {
+                id: country.id,
+                name: country.name.toLowerCase(),
+                image: country.image,
+                continent: country.continent,
+                capital: country.capital === false ? 'false' : country.capital,
+                area: country.area,
+                population: country.population
+            };
+
+            if ( country.subregion ) {
+                countryData.subregion = country.subregion;
+            }
+
             await Countries.findOrCreate({
-                where: { 
-                    id: country.id,
-                    name: country.name.toLowerCase(),
-                    image: country.image,
-                    continent: country.continent,
-                    capital: country.capital === false ? 'false' : country.capital,
-                    subregion: country.subregion !== false ? 'false' : country.subregion,
-                    area: country.area,
-                    population: country.population
-                }
-            })
-        })
+                where: countryData
+            });
+        });
     }
 }
 

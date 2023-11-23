@@ -11,7 +11,7 @@ const DetailPage = () => {
 
   const dispatch = useDispatch();
   const countryDetail = useSelector( ( state ) =>  state.countryDetail );
-  const { name,image,continent,capital,area,population,rubregion } = countryDetail;
+  const { name,image,continent,capital,area,population,subregion } = countryDetail;
 
   useEffect(() => {
     dispatch( getCountryById( id ) );
@@ -27,14 +27,35 @@ const DetailPage = () => {
             <div className={ styles.flagContent }>
               <img className={ styles.flag } src={ image } alt={ `Bandera de ${ name }` } />
             </div>
-            <div>
-              <h3>{ id }</h3>
-              <h3>{ name }</h3>
-              <h3>{ continent }</h3>
-              <h3>{ capital }</h3>
-              <h3>{ rubregion }</h3>
-              <h3>{ area }</h3>
-              <h3>{ population }</h3>
+            <div className={ styles.contentInfo }>
+              <div className={ styles.divInfo }>
+                <p>id:</p>
+                <h3>{ id }</h3>
+              </div>
+              <div className={ styles.divInfo }>
+                <p>Nombre:</p>
+                <h3>{ name }</h3>
+              </div>
+              <div className={ styles.divInfo }>
+                <p>Continente:</p>
+                <h3>{ continent }</h3>
+              </div>
+              <div className={ styles.divInfo }>
+                <p>Capital:</p>
+                <h3>{ capital }</h3>
+              </div>
+              <div className={ styles.divInfo }>
+                <p>Subregion:</p>
+                <h3>{ subregion }</h3>
+              </div>
+              <div className={ styles.divInfo }>
+                <p>Area:</p>
+                <h3>{ area }</h3>
+              </div>
+              <div className={ styles.divInfo }>
+                <p>Poblacion:</p>
+                <h3>{ population }</h3>
+              </div>
             </div>
           </div>
         </div>

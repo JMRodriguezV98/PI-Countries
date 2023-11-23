@@ -5,10 +5,17 @@
     margin-top: 25px;
     margin-right: 15px;
     margin-left: 15px;
+    font-family: Helvetica, sans-serif;
     align-items: center;
-    width: 400px;
+    width: 380px;
+    border-radius: 20px 20px 5px 5px;
     height: 300px;
-    /* background-color: var( --color-quinary );  */
+    background-color: rgba(240, 248, 255, 0.082); 
+    transition: 0.5s ease;
+}
+
+.containCard:hover{
+    transform: scale(1.1);
 }
 
 .contentImage{
@@ -21,10 +28,32 @@
 
 .image{
     width: 70%;
-    height: 70%;
+    height: 80%;
 }
 
 .link{
     text-decoration: none;
     color: var(--color-tertiary);
+}
+
+.contentInfo{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.h3Titles{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var( --color-quinary );
+}
+
+.titles{
+    font-size: 14px;
+    width: 100%;
+    color: var( --color-tertiary );
 }

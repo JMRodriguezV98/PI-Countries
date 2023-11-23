@@ -15,13 +15,13 @@ const Navbar = ( { onHandleSubmit,onHandleChange } ) => {
             </Link>
             <div className={ styles.contentSections }>
                 <Link className={ styles.link } to={'/home'}>
-                    <h3  >Home</h3>
+                    <h3>HOME</h3>
                 </Link>
                 {
                     window.location.href !== `${url}form` && 
                     (
                         <Link className={ styles.link } to={'/form'}>
-                            <h3>Activities</h3>
+                            <h3>ACTIVIDADES</h3>
                         </Link>
                     ) 
                 }
@@ -30,10 +30,10 @@ const Navbar = ( { onHandleSubmit,onHandleChange } ) => {
                 window.location.href === `${url}home` && 
                 (
                     <div className={ styles.contentSearchBar }>
-                        <label>Country</label>
+                        <label>Buscar pais</label>
                         <div className={ styles.search } >
                             <input type="text" onChange={ onHandleChange } />
-                            <button onClick={ onHandleSubmit } type='submit'>Search</button>
+                            <button className={ styles.buttonSearch } onClick={ onHandleSubmit } type='submit'>Search</button>
                         </div>
                     </div>
                 )

@@ -1,16 +1,20 @@
 import { 
-    GET_BY_ID, 
-    // GET_BY_NAME, 
+    FILTER,
+    GET_ACTIVITIES,
+    GET_BY_ID,
     GET_COUNTRIES, 
-    ORDER, PAGINATE } from "../actions/action-Types";
+    ORDER, PAGINATE, RESET } from "../actions/action-Types";
 
 
 let initialState = {
     allCountries: [],
     countriesCopy: [],
     countryDetail: {},
+    activities: [],
     countriesOrder: [],
-    currentPage: 0
+    currentPage: 0,
+    countryFiltered: [],
+    filter: false
 }
 
 function rootReducer( state = initialState,action  ){
@@ -70,15 +74,25 @@ function rootReducer( state = initialState,action  ){
             : action.payload === 'PREV' 
             ? state.currentPage - 1 
             : parseInt( action.payload,10 );
-
             
             const totalPages = state.countriesCopy.length / 10;
+            const firstIndex = ( targetPage - 1 ) * itemsXPage;
+
+            if( state.filter ){
+                if( targetPage < 1 || targetPage > ( Math.ceil( state.countryFiltered.length/10 ) ) ){
+                    return state;
+                }
+
+                return{
+                    ...state,
+                    allCountries: [ ...state.countryFiltered ].slice( firstIndex, firstIndex + itemsXPage ),
+                    currentPage: targetPage,
+                }
+            }
 
             if( targetPage < 1 || targetPage > totalPages ){
                 return state;
             }
-
-            const firstIndex = ( targetPage - 1 ) * itemsXPage;
 
             return{
                 ...state,
@@ -86,7 +100,28 @@ function rootReducer( state = initialState,action  ){
                 currentPage: targetPage,
             }
 
-            
+        case FILTER:
+            const filterByContinent = [ ...state.countriesCopy ].filter( ( country ) => country.continent.includes( action.payload ) );
+            return{
+                ...state,
+                allCountries: filterByContinent.slice( 0,itemsXPage ),
+                countryFiltered: filterByContinent,
+                filter: true,
+            }
+
+        case RESET:
+            return{
+                ...state,
+                filter: false,
+                allCountries: state.countriesCopy.slice( 0,itemsXPage )
+            }
+
+        case GET_ACTIVITIES:
+            return{
+                ...state,
+                activities: [ ...action.payload ],
+                allCountries: [ ...state.countriesCopy ].slice( 0,itemsXPage ),
+            }
 
         default: 
             return state

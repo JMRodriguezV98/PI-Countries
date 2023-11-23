@@ -9,7 +9,7 @@ const cleanInfoAPI = ( response ) => {
         const image = country.flags.svg;
         const continent = Array.isArray( country.continents ) && country.continents.toString();
         const capital = Array.isArray( country.capital ) && country.capital.toString();
-        const subregion = country.subregion;
+        const subregion = country?.subregion;
         const area = country.area;
         const population = country.population;
 

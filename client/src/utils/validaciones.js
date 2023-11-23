@@ -1,4 +1,6 @@
-export const validate = ( input,inputName,error,setError ) => {
+
+export const validate = ( input,inputName,error,setError,countriesArray ) => {
+    let arrayCountries = [];
     if( inputName === 'name' ){
       if( input.name === '' ){
         setError({
@@ -50,5 +52,17 @@ export const validate = ( input,inputName,error,setError ) => {
           season: ''
         })
       }
+    }else if( inputName === 'countries' ){
+        if( countriesArray.lenth < 0 ){
+            setError({
+                ...error,
+                countries: 'Debe seleccionar almenos un pais'
+            })
+        }else{
+            setError({
+                ...error,
+                countries: ''
+            })
+        }
     }
   }

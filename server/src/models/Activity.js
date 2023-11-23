@@ -12,6 +12,7 @@ module.exports = (sequelize) => {
     },
     name: {
         type: DataTypes.STRING,
+        unique: true,
         allowNull: false,
         validate: {
             len: [ 3,30 ]
@@ -30,8 +31,14 @@ module.exports = (sequelize) => {
     },
     season: {
         type: DataTypes.STRING,
+        allowNull: false,
         defaultValue: 'Verano',
-        allowNull: false
+        validate: {
+            isIn: {
+                args: [['Verano','Otoño','Invierno','Primavera']],
+                msg: 'La temporada no esta entre las validas'
+            }
+        }
     }
   },{ timestamps: false, freezeTableName: true } );
 };

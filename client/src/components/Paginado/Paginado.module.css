@@ -1,0 +1,36 @@
+.contentPaginado{
+    display: flex;
+    margin-top: 40px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.buttonsNextPrev{
+    height: 50px;
+    width: 60px;
+    border: none;
+    background-color: transparent;
+    color: var( --color-tertiary );
+    font-family: Helvetica, sans-serif;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.buttonsPag{
+    height: 70%;
+    width: 2.5%;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    font-family: Helvetica, sans-serif;
+    background-color: var( --color-secondary );
+    font-size: large;
+    font-weight: 700;
+    color: var(--color-primary);
+    transition: 0.2s ease-in;
+}
+
+.buttonsPag:hover{
+    transform: scale(1.1);
+    box-shadow: var( --color-primary-transparent ) 0px 30px 60px -12px inset, var( --color-primary-transparent ) 0px 18px 36px -18px inset;
+}

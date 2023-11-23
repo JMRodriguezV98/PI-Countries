@@ -19,7 +19,15 @@ const postActivityController = async ( name,difficulty,duration,season,countries
 }
 
 const getActivitiesController = async () => {
-    const activitiesDB = await Activities.findAll();
+    const activitiesDB = await Activities.findAll({
+        include: [
+          {
+            model: Countries,
+            attributes: ['name'],
+            through: { attributes: [] },
+          },
+        ],
+    });
 
     return activitiesDB;
 }
