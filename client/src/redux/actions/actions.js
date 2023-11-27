@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FILTER, GET_ACTIVITIES, GET_BY_ID, GET_COUNTRIES, ORDER, PAGINATE, RESET } from "./action-Types";
+import { FILTER, FILTER_ACTIVITY, GET_ACTIVITIES, GET_BY_ID, GET_COUNTRIES, ORDER, PAGINATE, RESET } from "./action-Types";
 
 
 export const getCountries = () => {
@@ -36,7 +36,7 @@ export const getCountryById = ( idCountry ) => {
             const response = await axios( `http://localhost:3001/countries/${ idCountry }` );
             dispatch({
                 type: GET_BY_ID,
-                payload: response.data
+                payload: response.data[0]
             })
         } catch (error) {
             alert( error.response.data.error );
@@ -77,12 +77,15 @@ export const paginateCountries = ( controlPage ) => {
     }
 }
 
-export const filterCountryCotinent = ( continent ) => {
+export const filterCountryCotinent = ( value,name ) => {
     return ( dispatch ) => {
         try {
             dispatch({
                 type: FILTER,
-                payload: [continent]
+                payload: {
+                    value,
+                    name
+                }
             })
         } catch (error) {
             alert( error );
@@ -112,6 +115,19 @@ export const getActivities = () => {
             })
         } catch (error) {
             alert( error.response.data.error );
+        }
+    }
+}
+
+export const filterActivity = ( value ) => {
+    return ( dispatch ) => {
+        try{
+            dispatch({
+                type: FILTER_ACTIVITY,
+                payload: value
+            })
+        } catch ( error ) {
+            alert( error );
         }
     }
 }

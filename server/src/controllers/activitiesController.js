@@ -23,7 +23,7 @@ const getActivitiesController = async () => {
         include: [
           {
             model: Countries,
-            attributes: ['name'],
+            attributes: [ 'name' ],
             through: { attributes: [] },
           },
         ],

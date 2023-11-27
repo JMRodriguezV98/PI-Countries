@@ -27,7 +27,7 @@ const ActivityForm = () => {
     name: 'campo requerido',
     difficulty: 'Campo requerido',
     duration: '',
-    season: 'Campo requerido',
+    season: 'Selecciona una estacion',
     countries: 'Selecciona almenos un pais'
   })
 
@@ -39,11 +39,20 @@ const ActivityForm = () => {
         difficulty: number
       })
     }else if( event.target.name === 'countries' ){
+      if( !countriesArray.includes( event.target.value ) ){
+        setCountriesArray( [ ...countriesArray,event.target.value ] );
+
+        setInput({
+          ...input,
+          countries: [ ...input.countries,event.target.value ]
+        });
+        
+      }
+    }else if( event.target.name === 'season' ){
       setInput({
         ...input,
-        countries: [ ...input.countries,event.target.value ]
-      }),
-      setCountriesArray( [...countriesArray,event.target.value] )
+        season: event.target.value
+      })
     }else{
       setInput({
         ...input,
@@ -61,7 +70,9 @@ const ActivityForm = () => {
     event.preventDefault();
 
     const valueCountry = document.getElementById( 'countrySelect' );
+    const valueSeason = document.getElementById( 'seasonSelect' );
     valueCountry.value = 'Selecciona el pais';
+    valueSeason.value = 'Selecciona la estacion';
 
     setInput({
       name: '',
@@ -71,14 +82,16 @@ const ActivityForm = () => {
       countries: []
     })
 
+    setCountriesArray([]);
+
     setError({
       name: 'campo requerido',
       difficulty: 'Campo requerido',
       duration: '',
-      season: 'Campo requerido',
+      season: 'Selecciona una estacion',
       countries: 'Selecciona almenos un pais'
     })
-
+    
     dispatch( postActivity( input ) );
   }
   
@@ -104,7 +117,13 @@ const ActivityForm = () => {
                 </div>
                 <div className={ styles.fieldsContent } >
                   <label >Temporada</label>
-                  <input name='season' type="text" onChange={ handleChange } value={ input.season } />
+                  <select id="seasonSelect" name="season" onChange={ handleChange }>
+                    <option hidden>Seleccione estacion</option>
+                    <option value="Primavera">Primavera</option>
+                    <option value="Verano">Verano</option>
+                    <option value="Otoño">Otoño</option>
+                    <option value="Invierno">Invierno</option>
+                  </select>
                   <span>{ error.season }</span>
                 </div>
                 <div className={ styles.fieldsContent } >
@@ -116,14 +135,14 @@ const ActivityForm = () => {
                     }
                   </select>
                   <span>{ error.countries }</span>
-                  { input.countries.map( country => {
+                  { countriesArray.map( country => {
                     return(
                       <span key={ country } >{ country }</span>  
                     )
                   }) }
                 </div>
                 {
-                  error.name || error.difficulty || error.season ? null : <button type='submit'>Crear actividad</button>
+                  error.name || error.difficulty || error.season || error.countries ? null : <button type='submit'>Crear actividad</button>
                 }
             </form>
         </div>

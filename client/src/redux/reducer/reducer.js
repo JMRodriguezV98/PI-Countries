@@ -1,5 +1,6 @@
 import { 
     FILTER,
+    FILTER_ACTIVITY,
     GET_ACTIVITIES,
     GET_BY_ID,
     GET_COUNTRIES, 
@@ -101,12 +102,38 @@ function rootReducer( state = initialState,action  ){
             }
 
         case FILTER:
-            const filterByContinent = [ ...state.countriesCopy ].filter( ( country ) => country.continent.includes( action.payload ) );
-            return{
-                ...state,
-                allCountries: filterByContinent.slice( 0,itemsXPage ),
-                countryFiltered: filterByContinent,
-                filter: true,
+            if( !state.filter && action.payload.name === 'continentSelect' ){
+                const filterByContinent = [ ...state.countriesCopy ].filter( ( country ) => country.continent.includes( action.payload.value ) );
+                return{
+                    ...state,
+                    allCountries: filterByContinent.slice( 0,itemsXPage ),
+                    countryFiltered: filterByContinent,
+                    filter: true,
+                }
+            }else if( !state.filter && action.payload.name === 'activitySelect' ){
+                const filterByActivity = [ ...state.countriesCopy ].filter( ( country ) => country.Activities.some( activity => activity.name.includes( action.payload.value ) ) );
+                return{
+                    ...state,
+                    allCountries: filterByActivity.slice( 0,itemsXPage ),
+                    countryFiltered: filterByActivity,
+                    filter: true,
+                }
+            }else if( state.filter && action.payload.name === 'continentSelect' ){
+                const filterByContinent = [ ...state.countryFiltered ].filter( ( country ) => country.continent.includes( action.payload.value ) );
+                return{
+                    ...state,
+                    allCountries: filterByContinent.slice( 0,itemsXPage ),
+                    countryFiltered: filterByContinent,
+                    filter: true,
+                }
+            }else if( state.filter && action.payload.name === 'activitySelect' ){
+                const filterByActivity = [ ...state.countryFiltered ].filter( ( country ) => country.Activities.some( activity => activity.name.includes( action.payload.value ) ) );
+                return{
+                    ...state,
+                    allCountries: filterByActivity.slice( 0,itemsXPage ),
+                    countryFiltered: filterByActivity,
+                    filter: true,
+                }
             }
 
         case RESET:
@@ -121,6 +148,15 @@ function rootReducer( state = initialState,action  ){
                 ...state,
                 activities: [ ...action.payload ],
                 allCountries: [ ...state.countriesCopy ].slice( 0,itemsXPage ),
+            }
+        
+        case FILTER_ACTIVITY:
+            const filterByActivity = [ ...state.countriesCopy ].filter( country => country.activities.includes( action.payload ) );
+            return{
+                ...state,
+                filter: true,
+                countryFiltered: filterByContinent,
+                allCountries: filterByActivity.slice( 0,itemsXPage )
             }
 
         default: 

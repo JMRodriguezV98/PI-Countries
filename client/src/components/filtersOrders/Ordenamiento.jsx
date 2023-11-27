@@ -17,16 +17,18 @@ const Ordenamiento = () => {
     }
 
     const handleFilterCountry = ( event ) => {
-        dispatch( filterCountryCotinent( event.target.value,event.target.name ) )
+        dispatch( filterCountryCotinent( event.target.value,event.target.name ) );
     }
 
     const handleReset = () => {
         const filtro = document.getElementById( 'filterContinent' );
         const order = document.getElementById( 'alphabetic' );
         const  population = document.getElementById( 'population' );
+        const actividadFiltro = document.getElementById( 'filterActivity' );
         filtro.value = 'Continente';
         order.value = 'Ordenar';
         population.value = 'Ordenar';
+        actividadFiltro.value = 'Actividad';
         dispatch( resetFilter() );
     }
 
@@ -56,12 +58,12 @@ const Ordenamiento = () => {
             </div>
             <div className={ styles.contentOrders }>
                 <h4>Filtro por continente</h4>
-                <select id='filterContinent' onChange={ handleFilterCountry } >
+                <select id='filterContinent' name='continentSelect' onChange={ handleFilterCountry } >
                 <option hidden>Continente</option>
                 {
                     optionContinent.map( continent => {
                         return(
-                            <option key={ continent } value={ continent } name='continent' >{ continent }</option>
+                            <option key={ continent } value={ continent } >{ continent }</option>
                         ) 
                     })
                 }
@@ -69,7 +71,7 @@ const Ordenamiento = () => {
             </div>
             <div className={ styles.contentOrders }>
                 <h4>Filtro por actividades</h4>
-                <select onChange={ handleFilterCountry } >
+                <select id='filterActivity' name='activitySelect' onChange={ handleFilterCountry } >
                 <option hidden>Actividad</option>
                 {
                     activities.map( ({ name,id }) => {

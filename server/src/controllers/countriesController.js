@@ -1,6 +1,6 @@
 const axios = require( 'axios' );
 const { cleanInfoAPI } = require( '../utils' );
-const { Countries } = require( '../db' );
+const { Countries,Activities } = require( '../db' );
 const { Op } = require('sequelize');
 
 //ruta del api
@@ -35,7 +35,16 @@ const getCountriesController = async() => {
 }
 
 const getCountryByIdController = async( idCountry ) => {
-    const countryByIdBD = await Countries.findByPk( idCountry );
+    const countryByIdBD = await Countries.findAll({
+        where: { id: idCountry },
+        include: [
+            {
+              model: Activities,
+              attributes: [ 'name' ],
+              through: { attributes: [] },
+            },
+        ],
+    });
     
     if( idCountry.length > 3 || idCountry.length < 3 ){
         throw new Error( `El id debe ser de 3 letras` );
@@ -50,6 +59,13 @@ const getCountryByIdController = async( idCountry ) => {
 
 const getCountryByNameController = async ( countryName ) => {
     const countryByName = await Countries.findAll({
+        include: [
+            {
+                model: Activities,
+                attributes: [ 'name' ],
+                through: { attributes: [] },
+            },
+        ],
         where: {
             name: {
                 [ Op.like ]: `%${ countryName }%` 
@@ -65,7 +81,15 @@ const getCountryByNameController = async ( countryName ) => {
 }
 
 const getCountries = async () => {
-    const countriesDB = await Countries.findAll();
+    const countriesDB = await Countries.findAll({
+        include: [
+            {
+              model: Activities,
+              attributes: [ 'name' ],
+              through: { attributes: [] },
+            },
+        ],
+    });
 
     return countriesDB
 }

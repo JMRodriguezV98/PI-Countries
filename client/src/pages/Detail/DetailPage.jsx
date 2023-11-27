@@ -8,15 +8,15 @@ import { getCountryById } from '../../redux/actions/actions';
 const DetailPage = () => {
 
   const { id } = useParams();
-
+  
   const dispatch = useDispatch();
   const countryDetail = useSelector( ( state ) =>  state.countryDetail );
-  const { name,image,continent,capital,area,population,subregion } = countryDetail;
 
   useEffect(() => {
     dispatch( getCountryById( id ) );
-  },[ dispatch,id ])
+  },[ dispatch,id ]);
   
+  const { Activities,area,capital,continent,image,name,population,subregion } = countryDetail;
 
   return (
     <>
@@ -55,6 +55,12 @@ const DetailPage = () => {
               <div className={ styles.divInfo }>
                 <p>Poblacion:</p>
                 <h3>{ population }</h3>
+              </div>
+              <div className={ styles.divInfo }>
+                <p>Actividades:</p>
+                { 
+                  Activities && Activities.map( ( actividad ) => <h3 key={ actividad.name }>{ actividad.name }</h3> )
+                }
               </div>
             </div>
           </div>
