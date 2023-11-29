@@ -15,7 +15,9 @@ let initialState = {
     countriesOrder: [],
     currentPage: 0,
     countryFiltered: [],
-    filter: false
+    countryFilteredCopy: [],
+    filter: false,
+    filterActivity: false,
 }
 
 function rootReducer( state = initialState,action  ){
@@ -102,13 +104,22 @@ function rootReducer( state = initialState,action  ){
             }
 
         case FILTER:
-            if( !state.filter && action.payload.name === 'continentSelect' ){
+
+            if( action.payload.name === 'continentSelect' ){
                 const filterByContinent = [ ...state.countriesCopy ].filter( ( country ) => country.continent.includes( action.payload.value ) );
                 return{
                     ...state,
                     allCountries: filterByContinent.slice( 0,itemsXPage ),
                     countryFiltered: filterByContinent,
-                    filter: true,
+                    countryFilteredCopy: filterByContinent,
+                    filter: true
+                }
+            }else if( state.filter && action.payload.name === 'activitySelect' ){
+                const filterByActivity = [ ...state.countryFilteredCopy ].filter( ( country ) => country.Activities.some( activity => activity.name.includes( action.payload.value ) ) );
+                return{
+                    ...state,
+                    allCountries: filterByActivity.slice( 0,itemsXPage ),
+                    countryFiltered: filterByActivity,
                 }
             }else if( !state.filter && action.payload.name === 'activitySelect' ){
                 const filterByActivity = [ ...state.countriesCopy ].filter( ( country ) => country.Activities.some( activity => activity.name.includes( action.payload.value ) ) );
@@ -116,24 +127,9 @@ function rootReducer( state = initialState,action  ){
                     ...state,
                     allCountries: filterByActivity.slice( 0,itemsXPage ),
                     countryFiltered: filterByActivity,
-                    filter: true,
-                }
-            }else if( state.filter && action.payload.name === 'continentSelect' ){
-                const filterByContinent = [ ...state.countryFiltered ].filter( ( country ) => country.continent.includes( action.payload.value ) );
-                return{
-                    ...state,
-                    allCountries: filterByContinent.slice( 0,itemsXPage ),
-                    countryFiltered: filterByContinent,
-                    filter: true,
-                }
-            }else if( state.filter && action.payload.name === 'activitySelect' ){
-                const filterByActivity = [ ...state.countryFiltered ].filter( ( country ) => country.Activities.some( activity => activity.name.includes( action.payload.value ) ) );
-                return{
-                    ...state,
-                    allCountries: filterByActivity.slice( 0,itemsXPage ),
-                    countryFiltered: filterByActivity,
-                    filter: true,
-                }
+                    countryFilteredCopy: filterByActivity,
+                    filterActivity: true,
+                } 
             }
 
         case RESET:
@@ -148,15 +144,6 @@ function rootReducer( state = initialState,action  ){
                 ...state,
                 activities: [ ...action.payload ],
                 allCountries: [ ...state.countriesCopy ].slice( 0,itemsXPage ),
-            }
-        
-        case FILTER_ACTIVITY:
-            const filterByActivity = [ ...state.countriesCopy ].filter( country => country.activities.includes( action.payload ) );
-            return{
-                ...state,
-                filter: true,
-                countryFiltered: filterByContinent,
-                allCountries: filterByActivity.slice( 0,itemsXPage )
             }
 
         default: 
