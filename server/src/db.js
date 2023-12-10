@@ -4,7 +4,7 @@ const { Sequelize } = require("sequelize");
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY,
+  DB_USER, DB_PASSWORD, DB_HOST, POSTGRES_URL_NON_POOLING,
 } = process.env;
 
 // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`, {
@@ -13,7 +13,7 @@ const {
 // });
 
 const sequelize = new Sequelize(
-  DB_DEPLOY, 
+  POSTGRES_URL_NON_POOLING, 
   {
     logging: false, 
     native: false,
