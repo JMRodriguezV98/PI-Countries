@@ -1,6 +1,5 @@
 
 export const validate = ( input,inputName,error,setError,countriesArray ) => {
-    let arrayCountries = [];
     if( inputName === 'name' ){
       if( input.name === '' ){
         setError({
