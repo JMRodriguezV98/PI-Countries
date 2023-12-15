@@ -4,28 +4,28 @@ const { Sequelize } = require("sequelize");
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST, POSTGRES_URL_NON_POOLING,
+  DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
-// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`, {
-//   logging: false, 
-//   native: false, 
-// });
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`, {
+  logging: false, 
+  native: false, 
+});
 
-const sequelize = new Sequelize(
-  POSTGRES_URL_NON_POOLING, 
-  {
-    logging: false, 
-    native: false,
-    dialect: 'postgres',
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false
-      }
-    }
-  }
-);
+// const sequelize = new Sequelize(
+//   POSTGRES_URL_NON_POOLING, 
+//   {
+//     logging: false, 
+//     native: false,
+//     dialect: 'postgres',
+//     dialectOptions: {
+//       ssl: {
+//         require: true,
+//         rejectUnauthorized: false
+//       }
+//     }
+//   }
+// );
 
 const basename = path.basename(__filename);
 
